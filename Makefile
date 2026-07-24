@@ -4,16 +4,16 @@ CFLAGS = -Wextra -Wall
 INC = -Ilibft/
 LIBS = -Llibft -lft
 LIBFT = libft/libft.a
-SRCS = push_swap.c
-OBJS = $(SRCS:c=o)
+SRCS = push_swap.c push_swap_utils.c
+OBJS = $(SRCS:.c=.o)
 RM = rm -rf
 
-all: $(NAME) $(LIBFT)
+all: $(LIBFT) $(NAME)
 
 $(LIBFT):
-	make -c libft
+	make -C libft
 
-$(NAME):
+$(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 
 clean:
