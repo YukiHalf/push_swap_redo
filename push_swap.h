@@ -9,13 +9,17 @@
 #define MAX_INT 2147483647
 #define MIN_INT (-2147483647 - 1)
 
-typedef struct node {
-	int nr;
-	struct node *next;
-} node_t;
+typedef struct node_s {
+	long data;
+	struct node_s *next;
+} t_node;
 
+typedef struct stack_s {
+	int lenght;
+	t_node *head;
+} t_stack;
 
 // Utils
 int has_alpha(char *s);
-
+void push_stack(t_stack *stack, long number);
 #endif

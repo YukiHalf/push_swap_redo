@@ -15,3 +15,13 @@ int has_alpha(char *s)
 	}
 return 0;
 }
+
+void push_stack(t_stack *stack, long number)
+{
+	t_node *tmp;
+
+	//if(node->next == NULL)
+	//{
+
+	//}
+}
