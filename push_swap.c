@@ -1,20 +1,14 @@
 #include "push_swap.h"
 
-int allocate_stacks(t_stack *stack_a,t_stack *stack_b)
+void initStacks(t_stack *stack_a,t_stack *stack_b)
 {
-	stack_a = malloc(sizeof(t_stack));
-	if(!stack_a)
-		return -1;
-	stack_b = malloc(sizeof(t_stack));
-	if(!stack_b)
-	{
-		free(stack_a);
-		return -1;
-	}
-	return 0;
+	stack_a->head = NULL;
+	stack_b->head = NULL;
+	stack_a->size = 0;
+	stack_b->size = 0;
 }
 
-void parse_args(t_stack *stack_a,int count,char **numbers)
+void parseArgs(t_stack *stack_a,int count,char **numbers)
 {
 	int i;
 	int j;
@@ -29,7 +23,7 @@ void parse_args(t_stack *stack_a,int count,char **numbers)
 		while(tmp[j] && *tmp)
 		{
 			tmp_nb = ft_atol(tmp[j]);
-			push_stack(stack_a, tmp_nb);
+			pushStack(stack_a, tmp_nb);
 			j++;
 		}
 		free(tmp);
@@ -38,7 +32,7 @@ void parse_args(t_stack *stack_a,int count,char **numbers)
 }
 
 
-int check_args(int count, char **numbers)
+int checkArgs(int count, char **numbers)
 {
 	int i;
 	int j;
@@ -53,7 +47,7 @@ int check_args(int count, char **numbers)
 		while(tmp[j] && *tmp)
 		{
 			tmp_nb = ft_atol(tmp[j]);
-			if((tmp_nb > MAX_INT || tmp_nb < MIN_INT) || has_alpha(tmp[j]) == 1)
+			if((tmp_nb > MAX_INT || tmp_nb < MIN_INT) || hasAlpha(tmp[j]) == 1)
 			{
 					free(tmp);
 					return 1;
@@ -72,13 +66,21 @@ int main(int argc,char **argv)
 	if(argc == 1)
 		return 0;
 
-	t_stack *stack_a;
-	t_stack *stack_b;
+	t_stack stack_a;
+	t_stack stack_b;
 
-	if(check_args(argc,argv) == 1)
+	if(checkArgs(argc,argv) == 1)
 		display_error("Error\n",true);
-	if(!(allocate_stacks(&stack_a,&stack_b)))
-		display_error("Malloc failed\n",true);
-	parse_args(stack_a,argc,argv);
+	initStacks(&stack_a,&stack_b);
+	parseArgs(&stack_a,argc,argv);
 
+	t_node *tmp;
+	tmp = stack_a.head;
+	printf("HEAD %ld \n",tmp->data);
+	do
+	{
+		tmp = tmp->next;
+		printf("%ld \n",tmp->data);
+
+	} while (tmp->next);
 }

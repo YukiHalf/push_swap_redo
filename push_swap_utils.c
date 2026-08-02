@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int has_alpha(char *s)
+int hasAlpha(char *s)
 {
 	int i;
 
@@ -16,12 +16,24 @@ int has_alpha(char *s)
 return 0;
 }
 
-void push_stack(t_stack *stack, long number)
+int pushStack(t_stack *stack, long number)
 {
+	t_node *newNode;
 	t_node *tmp;
 
-	//if(node->next == NULL)
-	//{
-
-	//}
+	newNode = malloc(sizeof(t_node));
+	if(!newNode)
+		return -1;
+	if(stack->head == NULL)
+		stack->head = newNode;
+	else
+	{
+		tmp = stack->head;
+		while(tmp->next)
+			tmp = tmp->next;
+		tmp->next = newNode;
+	}
+	newNode->data = number;
+	stack->size++;
+	return 0;
 }

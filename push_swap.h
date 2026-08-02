@@ -15,11 +15,11 @@ typedef struct node_s {
 } t_node;
 
 typedef struct stack_s {
-	int lenght;
+	int size;
 	t_node *head;
 } t_stack;
 
 // Utils
-int has_alpha(char *s);
-void push_stack(t_stack *stack, long number);
+int hasAlpha(char *s);
+int pushStack(t_stack *stack, long number);
 #endif

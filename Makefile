@@ -11,18 +11,18 @@ RM = rm -rf
 all: $(LIBFT) $(NAME)
 
 $(LIBFT):
-	make -C libft
+	make -C libft bonus
 
 $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 
 clean:
 	$(RM) $(OBJS)
-	make -f libft clean
+	make -C libft clean
 
 fclean:
 	$(RM) $(OBJS) $(NAME)
-	make -f libft fclean
+	make -C libft fclean
 
 re:	fclean
 	$(MAKE) all
