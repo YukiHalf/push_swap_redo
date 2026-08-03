@@ -38,24 +38,23 @@ int checkArgs(int count, char **numbers)
 	int j;
 	char **tmp;
 	long tmp_nb;
+	int map[MAX_INT][2];
 
-	i = 1;
-	while(i < count)
+	i = -1;
+	while(++i < count)
 	{
 		tmp = ft_split(numbers[i],' ');
-		j = 0;
-		while(tmp[j] && *tmp)
+		j = -1;
+		while(tmp[++j] && *tmp)
 		{
 			tmp_nb = ft_atol(tmp[j]);
-			if((tmp_nb > MAX_INT || tmp_nb < MIN_INT) || hasAlpha(tmp[j]) == 1)
+			if((tmp_nb > MAX_INT || tmp_nb < MIN_INT) || hasAlpha(tmp[j]) == 1 || loadMap(tmp_nb,map) == -1)
 			{
 					free(tmp);
 					return 1;
 			}
-			j++;
 		}
 		free(tmp);
-		i++;
 	}
 	return 0;
 }
@@ -76,11 +75,9 @@ int main(int argc,char **argv)
 
 	t_node *tmp;
 	tmp = stack_a.head;
-	printf("HEAD %ld \n",tmp->data);
-	do
+	while(tmp)
 	{
+		printf("HEAD %ld \n",tmp->data);
 		tmp = tmp->next;
-		printf("%ld \n",tmp->data);
-
-	} while (tmp->next);
+	}
 }

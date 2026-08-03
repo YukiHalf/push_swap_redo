@@ -22,4 +22,5 @@ typedef struct stack_s {
 // Utils
 int hasAlpha(char *s);
 int pushStack(t_stack *stack, long number);
+int loadMap(long key, int map[MAX_INT][2]);
 #endif
