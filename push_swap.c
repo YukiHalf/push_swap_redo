@@ -73,11 +73,12 @@ int main(int argc,char **argv)
 	parseArgs(&stack_a,argc,argv);
 	if(checkDupes(stack_a.head) == -1)
 		display_error("Error\n",true);
+	sortStacks(&stack_a,&stack_b,argc - 1);
 	t_node *tmp;
 	tmp = stack_a.head;
 	while(tmp)
 	{
-		printf("HEAD %ld \n",tmp->data);
+		printf("%d %ld \n",tmp->index,tmp->data);
 		tmp = tmp->next;
 	}
 }

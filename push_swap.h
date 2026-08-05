@@ -11,6 +11,7 @@
 
 typedef struct node_s {
 	long data;
+	int index;
 	struct node_s *next;
 } t_node;
 
@@ -21,6 +22,8 @@ typedef struct stack_s {
 
 // Utils
 int hasAlpha(char *s);
+int isSorted(t_stack *stack);
 int pushStack(t_stack *stack, long number);
 int checkDupes(t_node *node);
+void sortStacks(t_stack *stack_a,t_stack *stack_b,int size);
 #endif

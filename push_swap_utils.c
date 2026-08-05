@@ -64,3 +64,40 @@ int checkDupes(t_node *node)
 	}
 	return 0;
 }
+
+
+void rankStack(t_stack *stack)
+{
+	t_node *tmp;
+	t_node *node;
+	int index;
+
+	node = stack->head;
+	while(node)
+	{
+		index = 0;
+		tmp = stack->head;
+		while(tmp)
+		{
+			if(node->data > tmp->data)
+				index++;
+			tmp = tmp->next;
+		}
+	node->index = index;
+	node = node->next;
+	}
+}
+
+
+void sortStacks(t_stack *stack_a,t_stack *stack_b,int size)
+{
+	rankStack(stack_a);
+	if(isSorted(stack_a) == 0)
+		return;
+	if(size == 2)
+		swapStack(stack_a);
+	//else if (size == 3)
+	//{
+	//	simpleSort(stack_a);
+	//}
+}

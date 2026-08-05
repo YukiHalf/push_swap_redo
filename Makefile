@@ -4,7 +4,7 @@ CFLAGS = -Wextra -Wall
 INC = -Ilibft/
 LIBS = -Llibft -lft
 LIBFT = libft/libft.a
-SRCS = push_swap.c push_swap_utils.c
+SRCS = push_swap.c push_swap_utils.c push_swap_utils_stack.c
 OBJS = $(SRCS:.c=.o)
 RM = rm -rf
 
