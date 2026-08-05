@@ -44,20 +44,23 @@ int pushStack(t_stack *stack, long number)
 	return 0;
 }
 
-
-int loadMap(long key, int map[MAX_INT][2])
+int checkDupes(t_node *node)
 {
-	if(key < 0)
+	t_node *tmp;
+
+	while(node)
 	{
-		if(map[-key][1] == 1)
-			return -1;
-		map[-key][1] = 1;
+		if(node->next)
+			tmp = node->next;
+		else
+			tmp = NULL;
+		while(tmp)
+		{
+			if(tmp->data == node->data)
+				return -1;
+			tmp = tmp->next;
+		}
+		node = node->next;
 	}
-	else
-	{
-		if(map[key][0] == 1)
-			return -1;
-		map[key][0] = 1;
-	}
-return 0;
+	return 0;
 }

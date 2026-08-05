@@ -38,9 +38,8 @@ int checkArgs(int count, char **numbers)
 	int j;
 	char **tmp;
 	long tmp_nb;
-	int map[MAX_INT][2];
 
-	i = -1;
+	i = 0;
 	while(++i < count)
 	{
 		tmp = ft_split(numbers[i],' ');
@@ -48,7 +47,7 @@ int checkArgs(int count, char **numbers)
 		while(tmp[++j] && *tmp)
 		{
 			tmp_nb = ft_atol(tmp[j]);
-			if((tmp_nb > MAX_INT || tmp_nb < MIN_INT) || hasAlpha(tmp[j]) == 1 || loadMap(tmp_nb,map) == -1)
+			if((tmp_nb > MAX_INT || tmp_nb < MIN_INT) || hasAlpha(tmp[j]) == 1)
 			{
 					free(tmp);
 					return 1;
@@ -72,7 +71,8 @@ int main(int argc,char **argv)
 		display_error("Error\n",true);
 	initStacks(&stack_a,&stack_b);
 	parseArgs(&stack_a,argc,argv);
-
+	if(checkDupes(stack_a.head) == -1)
+		display_error("Error\n",true);
 	t_node *tmp;
 	tmp = stack_a.head;
 	while(tmp)
