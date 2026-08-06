@@ -75,9 +75,12 @@ void simpleSort(t_stack *stack)
 				swapStack(stack,'a');
 			return;
 		}
-		rRotateStack(stack,'a');
+		rotateStack(stack,'a');
 		if(isSorted(stack) == 1)
 			swapStack(stack,'a');
-		rotateStack(stack,'a');
+		else
+			return;
+		if(isSorted(stack) == 1)
+			rotateStack(stack,'a');
 }
 
