@@ -92,7 +92,6 @@ void rankStack(t_stack *stack)
 void sortStacks(t_stack *stack_a,t_stack *stack_b,int size)
 {
 	rankStack(stack_a);
-	printf("%d\n",size);
 	if(isSorted(stack_a) == 0)
 		return;
 	if(size == 2)

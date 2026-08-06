@@ -30,4 +30,5 @@ void simpleSort(t_stack *stack);
 // Moves
 void swapStack(t_stack *stack,char x);
 void rRotateStack(t_stack *stack,char x);
+void rotateStack(t_stack *stack,char x);
 #endif

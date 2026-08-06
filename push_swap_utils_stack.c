@@ -14,7 +14,22 @@ int isSorted(t_stack *stack)
 	return 0;
 }
 
-void Rota
+void rotateStack(t_stack *stack,char x)
+{
+
+	t_node *tmp;
+
+	tmp = stack->head;
+	while(tmp->next)
+			tmp = tmp->next;
+	tmp->next = stack->head;
+	tmp = stack->head;
+	stack->head = stack->head->next;
+	tmp->next = NULL;
+	write(1,"r",2);
+	write(1,&x,1);
+	write(1,"\n",1);
+}
 
 void rRotateStack(t_stack *stack,char x)
 {
