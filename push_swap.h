@@ -26,4 +26,8 @@ int isSorted(t_stack *stack);
 int pushStack(t_stack *stack, long number);
 int checkDupes(t_node *node);
 void sortStacks(t_stack *stack_a,t_stack *stack_b,int size);
+void simpleSort(t_stack *stack);
+// Moves
+void swapStack(t_stack *stack,char x);
+void rRotateStack(t_stack *stack,char x);
 #endif
