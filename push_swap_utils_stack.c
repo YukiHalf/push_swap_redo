@@ -39,7 +39,23 @@ void simpleSort(t_stack *stack)
 
 void quickSort(t_stack *stack_a,t_stack *stack_b)
 {
-	pushStack(stack_b,stack_a,'b');
-	pushStack(stack_b,stack_a,'b');
-
+	t_node *tmp;
+	int i =0;
+	tmp = stack_a->head;
+	while(tmp && i < stack_a->size/2)
+	{
+		if(tmp->index == i)
+		{
+			pushStack(stack_b,stack_a,'b');
+			i++;
+		}
+		else
+		{
+			rotateStack(stack_a,'a');
+			tmp = stack_a->head;
+		}
+	}
+	simpleSort(stack_a);
+	while(stack_b->head)
+		pushStack(stack_a,stack_b,'a');
 }
