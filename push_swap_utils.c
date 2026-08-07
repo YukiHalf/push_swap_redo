@@ -89,17 +89,16 @@ void rankStack(t_stack *stack)
 }
 
 
-void sortStacks(t_stack *stack_a,t_stack *stack_b,int size)
+void sortStacks(t_stack *stack_a,t_stack *stack_b)
 {
 	rankStack(stack_a);
 	if(isSorted(stack_a) == 0)
-		return;
-	else if(size == 2)
+			return;
+	else if(stack_a->size == 2)
 		swapStack(stack_a,'a');
-	else if (size == 3)
+	else if (stack_a->size == 3)
 		simpleSort(stack_a);
-	else if(size > 3 && size <= 7)
+	else if(stack_a->size > 3 && stack_a->size <= 7)
 		quickSort(stack_a,stack_b);
-
 
 }

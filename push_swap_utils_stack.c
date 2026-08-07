@@ -22,13 +22,13 @@ int optimizedRotate(t_stack *stack,int index)
 			i++;
 		tmp = tmp->next;
 	}
-	printf("%d %d = %d\n",i,j,i < j);
 	return(i < j);
 }
 
 int isSorted(t_stack *stack)
 {
 	t_node *tmp;
+
 
 	tmp = stack->head;
 	while(tmp)

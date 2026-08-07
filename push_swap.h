@@ -25,7 +25,7 @@ int hasAlpha(char *s);
 int isSorted(t_stack *stack);
 int addNodeStack(t_stack *stack, long number);
 int checkDupes(t_node *node);
-void sortStacks(t_stack *stack_a,t_stack *stack_b,int size);
+void sortStacks(t_stack *stack_a,t_stack *stack_b);
 void simpleSort(t_stack *stack);
 void quickSort(t_stack *stack_a,t_stack *stack_b);
 // Moves

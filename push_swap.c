@@ -73,20 +73,5 @@ int main(int argc,char **argv)
 	parseArgs(&stack_a,argc,argv);
 	if(checkDupes(stack_a.head) == -1)
 		display_error("Error\n",true);
-	sortStacks(&stack_a,&stack_b,argc - 1);
-	t_node *tmp;
-	t_node *tmpB;
-	tmpB = stack_b.head;
-	tmp = stack_a.head;
-	while(tmp)
-	{
-		printf("%ld\n",tmp->data);
-		tmp = tmp->next;
-	}
-	printf("\n");
-	while(tmpB)
-	{
-		printf("%ld\n",tmpB->data);
-			tmpB = tmpB->next;
-	}
+	sortStacks(&stack_a,&stack_b);
 }
