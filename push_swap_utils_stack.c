@@ -14,53 +14,6 @@ int isSorted(t_stack *stack)
 	return 0;
 }
 
-void rotateStack(t_stack *stack,char x)
-{
-
-	t_node *tmp;
-
-	tmp = stack->head;
-	while(tmp->next)
-			tmp = tmp->next;
-	tmp->next = stack->head;
-	tmp = stack->head;
-	stack->head = stack->head->next;
-	tmp->next = NULL;
-	write(1,"r",2);
-	write(1,&x,1);
-	write(1,"\n",1);
-}
-
-void rRotateStack(t_stack *stack,char x)
-{
-	t_node *tmp;
-
-	tmp = stack->head;
-	while(tmp->next->next)
-		tmp = tmp->next;
-	tmp->next->next = stack->head;
-	stack->head = tmp->next;
-	tmp->next = NULL;
-	write(1,"rr",2);
-	write(1,&x,1);
-	write(1,"\n",1);
-}
-
-
-void swapStack(t_stack *stack,char x)
-{
-	t_node *tmp;
-
-	if(stack->size == 1)
-		return;
-	tmp = stack->head->next;
-	stack->head->next = tmp->next;
-	tmp->next = stack->head;
-	stack->head = tmp;
-	write(1,"s",1);
-	write(1,&x,1);
-	write(1,"\n",1);
-}
 
 void simpleSort(t_stack *stack)
 {
@@ -84,3 +37,9 @@ void simpleSort(t_stack *stack)
 			rotateStack(stack,'a');
 }
 
+void quickSort(t_stack *stack_a,t_stack *stack_b)
+{
+	pushStack(stack_b,stack_a,'b');
+	pushStack(stack_b,stack_a,'b');
+
+}

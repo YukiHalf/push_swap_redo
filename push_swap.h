@@ -23,12 +23,14 @@ typedef struct stack_s {
 // Utils
 int hasAlpha(char *s);
 int isSorted(t_stack *stack);
-int pushStack(t_stack *stack, long number);
+int addNodeStack(t_stack *stack, long number);
 int checkDupes(t_node *node);
 void sortStacks(t_stack *stack_a,t_stack *stack_b,int size);
 void simpleSort(t_stack *stack);
+void quickSort(t_stack *stack_a,t_stack *stack_b);
 // Moves
 void swapStack(t_stack *stack,char x);
 void rRotateStack(t_stack *stack,char x);
 void rotateStack(t_stack *stack,char x);
+void pushStack(t_stack *toStack,t_stack *fromStack,char x);
 #endif

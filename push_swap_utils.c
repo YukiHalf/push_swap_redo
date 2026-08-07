@@ -22,7 +22,7 @@ int hasAlpha(char *s)
 return 0;
 }
 
-int pushStack(t_stack *stack, long number)
+int addNodeStack(t_stack *stack, long number)
 {
 	t_node *newNode;
 	t_node *tmp;
@@ -94,10 +94,12 @@ void sortStacks(t_stack *stack_a,t_stack *stack_b,int size)
 	rankStack(stack_a);
 	if(isSorted(stack_a) == 0)
 		return;
-	if(size == 2)
+	else if(size == 2)
 		swapStack(stack_a,'a');
 	else if (size == 3)
-	{
 		simpleSort(stack_a);
-	}
+	else if(size > 3 && size <= 7)
+		quickSort(stack_a,stack_b);
+
+
 }

@@ -23,7 +23,7 @@ void parseArgs(t_stack *stack_a,int count,char **numbers)
 		while(tmp[j] && *tmp)
 		{
 			tmp_nb = ft_atol(tmp[j]);
-			pushStack(stack_a, tmp_nb);
+			addNodeStack(stack_a, tmp_nb);
 			j++;
 		}
 		free(tmp);
@@ -75,10 +75,18 @@ int main(int argc,char **argv)
 		display_error("Error\n",true);
 	sortStacks(&stack_a,&stack_b,argc - 1);
 	t_node *tmp;
+	t_node *tmpB;
+	tmpB = stack_b.head;
 	tmp = stack_a.head;
 	while(tmp)
 	{
-		printf("%d %ld \n",tmp->index,tmp->data);
+		printf("%ld\n",tmp->data);
 		tmp = tmp->next;
+	}
+	printf("\n");
+	while(tmpB)
+	{
+		printf("%ld\n",tmpB->data);
+			tmpB = tmpB->next;
 	}
 }
