@@ -7,3 +7,5 @@
 !push_swap.h
 !push_swap_utils.c
 !push_swap_utils_stack.c
+!push_swap_moves.c
+!push_swap_utils_2.c

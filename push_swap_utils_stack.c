@@ -111,7 +111,15 @@ void radixSort(t_stack *stack_a,t_stack *stack_b)
 		i++;
 		}
 		while(stack_b->size > 0)
-			pushStack(stack_a,stack_b,'a');
+		{
+			if(optimizedRotate(stack_b,maxIndex(stack_b)))
+				while(stack_b->head->index != maxIndex(stack_b))
+					rotateStack(stack_b,'b');
+			else
+				while(stack_b->head->index != maxIndex(stack_b))
+					rRotateStack(stack_b,'b');
+				pushStack(stack_a,stack_b,'a');
+		}
 		bit++;
 	}
 }
