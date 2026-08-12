@@ -98,9 +98,7 @@ void radixSort(t_stack *stack_a,t_stack *stack_b)
 	int count;
 	bit = 0;
 	max_index = stack_a->size - 1;
-		printf("stack %d %d\n",stack_a->size,bit);
-
-	while((max_index >> bit) != 0)
+	while((max_index >> bit) != 0 || isSorted(stack_a) == 1)
 	{
 		int i = 0;
 		count = stack_a->size;

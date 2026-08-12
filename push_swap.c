@@ -82,4 +82,6 @@ int main(int argc,char **argv)
 		printf("%d %ld\n",tmp->index,tmp->data);
 		tmp = tmp->next;
 	}
+		printf("%d %ld\n",tmp->index,tmp->data);
+
 }
