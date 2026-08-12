@@ -74,4 +74,12 @@ int main(int argc,char **argv)
 	if(checkDupes(stack_a.head) == -1)
 		display_error("Error\n",true);
 	sortStacks(&stack_a,&stack_b);
+
+	t_node *tmp= stack_a.head;
+
+	while(tmp->next)
+	{
+		printf("%d %ld\n",tmp->index,tmp->data);
+		tmp = tmp->next;
+	}
 }

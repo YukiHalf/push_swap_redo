@@ -28,6 +28,7 @@ int checkDupes(t_node *node);
 void sortStacks(t_stack *stack_a,t_stack *stack_b);
 void simpleSort(t_stack *stack);
 void quickSort(t_stack *stack_a,t_stack *stack_b);
+void radixSort(t_stack *stack_a,t_stack *stack_b);
 // Moves
 void swapStack(t_stack *stack,char x);
 void rRotateStack(t_stack *stack,char x);

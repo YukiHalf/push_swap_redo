@@ -89,3 +89,31 @@ void quickSort(t_stack *stack_a,t_stack *stack_b)
 	while(stack_b->head)
 		pushStack(stack_a,stack_b,'a');
 }
+
+
+void radixSort(t_stack *stack_a,t_stack *stack_b)
+{
+	int bit;
+	int max_index;
+	int count;
+	bit = 0;
+	max_index = stack_a->size - 1;
+		printf("stack %d %d\n",stack_a->size,bit);
+
+	while((max_index >> bit) != 0)
+	{
+		int i = 0;
+		count = stack_a->size;
+		while(i < count)
+		{
+		if(((stack_a->head->index >> bit) & 1) == 0)
+			pushStack(stack_b,stack_a,'b');
+		else
+			rotateStack(stack_a,'a');
+		i++;
+		}
+		while(stack_b->size > 0)
+			pushStack(stack_a,stack_b,'a');
+		bit++;
+	}
+}
