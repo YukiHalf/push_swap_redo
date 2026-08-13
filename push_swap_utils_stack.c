@@ -93,33 +93,47 @@ void quickSort(t_stack *stack_a,t_stack *stack_b)
 
 void radixSort(t_stack *stack_a,t_stack *stack_b)
 {
-	int bit;
-	int max_index;
-	int count;
-	bit = 0;
-	max_index = stack_a->size - 1;
-	while((max_index >> bit) != 0 || isSorted(stack_a) == 1)
-	{
-		int i = 0;
-		count = stack_a->size;
-		while(i < count)
+		int lower;
+		int upper;
+		int chunk_size;
+		int pushed;
+		int maxInd;
+		int expected;
+		int totalSize;
+		lower = 0;
+		maxInd = maxIndex(stack_a);
+		upper = 0;
+		chunk_size = maxInd / 3;
+		totalSize = stack_a->size;
+		while(lower < totalSize)
 		{
-		if(((stack_a->head->index >> bit) & 1) == 0)
-			pushStack(stack_b,stack_a,'b');
-		else
-			rotateStack(stack_a,'a');
-		i++;
+			upper = lower + chunk_size;
+			if(upper > totalSize)
+				upper = totalSize;
+			expected = upper - lower;
+			pushed = 0;
+			while(pushed < expected)
+			{
+			if(stack_a->head->index >= lower && stack_a->head->index < upper)
+				{
+					pushStack(stack_b,stack_a,'b');
+					pushed++;
+				}
+			else
+				rotateStack(stack_a,'a');
+			}
+			lower = upper;
 		}
+
 		while(stack_b->size > 0)
 		{
-			if(optimizedRotate(stack_b,maxIndex(stack_b)))
-				while(stack_b->head->index != maxIndex(stack_b))
+			maxInd = maxIndex(stack_b);
+			if(optimizedRotate(stack_b,maxInd))
+				while(stack_b->head->index != maxInd)
 					rotateStack(stack_b,'b');
 			else
-				while(stack_b->head->index != maxIndex(stack_b))
+				while(stack_b->head->index != maxInd)
 					rRotateStack(stack_b,'b');
 				pushStack(stack_a,stack_b,'a');
 		}
-		bit++;
-	}
 }
