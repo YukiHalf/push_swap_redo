@@ -22,7 +22,7 @@ int optimizedRotate(t_stack *stack,int index)
 			i++;
 		tmp = tmp->next;
 	}
-	printf("%d oR: %d %d\n",index,i,j);
+	//printf("%d oR: %d %d\n",index,i,j);
 	if(i < -(j))
 		return(i);
 	else
@@ -134,10 +134,10 @@ int calcMoves(t_stack *stack_a,t_stack *stack_b,t_node *candidate,t_node *target
 {
 	int mv_c;
 	int mv_t;
-	printf("c %ld t %ld\n",candidate->data,target->data);
+	//printf("c %ld t %ld\n",candidate->data,target->data);
 	mv_c = optimizedRotate(stack_a,candidate->index);
 	mv_t = optimizedRotate(stack_b,target->index);
-	printf("mv_c %d mv_t %d\n",mv_c,mv_t);
+	//printf("mv_c %d mv_t %d\n",mv_c,mv_t);
 	if((mv_c <= mv_t ) && (mv_c >= 0 && mv_t >= 0) )
 		return(mv_t);
 	else if((mv_c >= mv_t ) && (mv_c >= 0 && mv_t >= 0) )
@@ -159,12 +159,15 @@ t_node  *findTarget(t_stack *stack,int candidate)
 	int max;
 
 	max = MIN_INT;
-
+	target = stack->head;
 	tmp = stack->head;
 	while(tmp)
 	{
+		printf("%ld < %d\n",tmp->data,candidate);
 		if(tmp->data < candidate && tmp->data > max)
 			{
+			printf("is good %ld %d\n",tmp->data,candidate);
+
 				target = tmp;
 				max = tmp->data;
 			}
@@ -178,6 +181,7 @@ void findPair(t_stack *stack_a,t_stack *stack_b)
 	t_node *a;
 	t_node *b;
 	int minMoves;
+	int currMoves;
 	t_node *target;
 
 	minMoves = stack_a->size + stack_b->size;
@@ -185,10 +189,11 @@ void findPair(t_stack *stack_a,t_stack *stack_b)
 	while(a)
 	{
 		target = findTarget(stack_b,a->data);
-		if(calcMoves(stack_a,stack_b,a,target) < minMoves)
+		currMoves = calcMoves(stack_a,stack_b,a,target);
+		if(currMoves < minMoves)
 		{
-				minMoves = calcMoves(stack_a,stack_b,a,target);
-				printf("%d min\n",minMoves);
+				minMoves = currMoves;
+				printf("%d min pari %ld %ld\n",minMoves,a->data,target->data);
 		}
 		a = a->next;
 	}
@@ -228,10 +233,10 @@ void turkSort(t_stack *stack_a, t_stack *stack_b)
 	//{
 		findPair(stack_a,stack_b);
 	//}
-	simpleSort(stack_a);
-	while(stack_b)
-	{
-		///
-	}
-	doRotationStack(stack_a,optimizedRotate(stack_a,0),'a');
+	//simpleSort(stack_a);
+	//while(stack_b)
+	//{
+	//	///
+	//}
+	//doRotationStack(stack_a,optimizedRotate(stack_a,0),'a');
 }
