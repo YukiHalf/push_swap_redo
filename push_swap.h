@@ -36,5 +36,5 @@ void swapStack(t_stack *stack,char x);
 void rRotateStack(t_stack *stack,char x);
 void rotateStack(t_stack *stack,char x);
 void pushStack(t_stack *toStack,t_stack *fromStack,char x);
-
+void doRotationStack(t_stack *stack,int rotations,char x);
 #endif

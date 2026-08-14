@@ -22,7 +22,7 @@ int optimizedRotate(t_stack *stack,int index)
 			i++;
 		tmp = tmp->next;
 	}
-	printf("oR: %d %d\n",i,j);
+	printf("%d oR: %d %d\n",index,i,j);
 	if(i < -(j))
 		return(i);
 	else
@@ -80,14 +80,7 @@ void quickSort(t_stack *stack_a,t_stack *stack_b)
 			i++;
 		}
 		else
-		{
-			if(optimizedRotate(stack_a,i))
-				while(stack_a->head->index != i)
-					rotateStack(stack_a,'a');
-			else
-				while(stack_a->head->index != i)
-					rRotateStack(stack_a,'a');
-		}
+			doRotationStack(stack_a,optimizedRotate(stack_a,i),'a');
 	}
 	simpleSort(stack_a);
 	while(stack_b->head)
@@ -132,13 +125,8 @@ void radixSort(t_stack *stack_a,t_stack *stack_b)
 		while(stack_b->size > 0)
 		{
 			maxInd = maxIndex(stack_b);
-			if(optimizedRotate(stack_b,maxInd))
-				while(stack_b->head->index != maxInd)
-					rotateStack(stack_b,'b');
-			else
-				while(stack_b->head->index != maxInd)
-					rRotateStack(stack_b,'b');
-				pushStack(stack_a,stack_b,'a');
+			doRotationStack(stack_b,optimizedRotate(stack_b,maxInd),'b');
+			pushStack(stack_a,stack_b,'a');
 		}
 }
 
@@ -160,6 +148,29 @@ int calcMoves(t_stack *stack_a,t_stack *stack_b,t_node *candidate,t_node *target
 		return(ft_abs(mv_c));
 	else if((mv_c < 0 && mv_t >= 0) ||  (mv_t < 0 && mv_c >= 0))
 		return(ft_abs(mv_c) + ft_abs(mv_t));
+	else
+		return (0);
+}
+
+t_node  *findTarget(t_stack *stack,int candidate)
+{
+	t_node *tmp;
+	t_node *target;
+	int max;
+
+	max = MIN_INT;
+
+	tmp = stack->head;
+	while(tmp)
+	{
+		if(tmp->data < candidate && tmp->data > max)
+			{
+				target = tmp;
+				max = tmp->data;
+			}
+		tmp = tmp->next;
+	}
+return target;
 }
 
 void findPair(t_stack *stack_a,t_stack *stack_b)
@@ -171,17 +182,10 @@ void findPair(t_stack *stack_a,t_stack *stack_b)
 
 	minMoves = stack_a->size + stack_b->size;
 	a = stack_a->head;
-	target = NULL;
 	while(a)
 	{
-		b = stack_b->head;
-		while(b)
-		{
-			if((target == NULL) || (b->data < a->data && b->data > target->data))
-				target = b;
-			b = b->next;
-		}
-		if((target->data < a->data ) && calcMoves(stack_a,stack_b,a,target) < minMoves)
+		target = findTarget(stack_b,a->data);
+		if(calcMoves(stack_a,stack_b,a,target) < minMoves)
 		{
 				minMoves = calcMoves(stack_a,stack_b,a,target);
 				printf("%d min\n",minMoves);
@@ -190,6 +194,28 @@ void findPair(t_stack *stack_a,t_stack *stack_b)
 	}
 
 printf("yo%ld %d\n",target->data,minMoves);
+}
+
+void doRotationStack(t_stack *stack,int rotations,char x)
+{
+	int i;
+
+	i = 0;
+	if(rotations < 0)
+	{
+		while(i < ft_abs(rotations))
+		{
+			rRotateStack(stack,x);
+			i++;
+		}
+	}else
+	{
+		while(i < rotations)
+		{
+			rotateStack(stack,x);
+			i++;
+		}
+	}
 }
 
 
@@ -202,4 +228,10 @@ void turkSort(t_stack *stack_a, t_stack *stack_b)
 	//{
 		findPair(stack_a,stack_b);
 	//}
+	simpleSort(stack_a);
+	while(stack_b)
+	{
+		///
+	}
+	doRotationStack(stack_a,optimizedRotate(stack_a,0),'a');
 }
