@@ -101,7 +101,7 @@ void sortStacks(t_stack *stack_a,t_stack *stack_b)
 	else if(stack_a->size > 3 && stack_a->size <= 7)
 		quickSort(stack_a,stack_b);
 	else if(stack_a->size > 7)
-		radixSort(stack_a,stack_b);
+		turkSort(stack_a,stack_b);
 	else
 		return;
 

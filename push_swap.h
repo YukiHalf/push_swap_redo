@@ -29,10 +29,12 @@ void sortStacks(t_stack *stack_a,t_stack *stack_b);
 void simpleSort(t_stack *stack);
 void quickSort(t_stack *stack_a,t_stack *stack_b);
 void radixSort(t_stack *stack_a,t_stack *stack_b);
+void turkSort(t_stack *stack_a, t_stack *stack_b);
 int maxIndex(t_stack *stack);
 // Moves
 void swapStack(t_stack *stack,char x);
 void rRotateStack(t_stack *stack,char x);
 void rotateStack(t_stack *stack,char x);
 void pushStack(t_stack *toStack,t_stack *fromStack,char x);
+
 #endif

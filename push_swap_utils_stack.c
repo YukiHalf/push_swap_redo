@@ -12,17 +12,21 @@ int optimizedRotate(t_stack *stack,int index)
 	j = 0;
 	found = 0;
 	tmp = stack->head;
-	while(tmp->next)
+	while(tmp)
 	{
 		if(tmp->index == index)
 			found = 1;
 		if(found)
-			j++;
+			j--;
 		else
 			i++;
 		tmp = tmp->next;
 	}
-	return(i < j);
+	printf("oR: %d %d\n",i,j);
+	if(i < -(j))
+		return(i);
+	else
+		return (j);
 }
 
 int isSorted(t_stack *stack)
@@ -136,4 +140,66 @@ void radixSort(t_stack *stack_a,t_stack *stack_b)
 					rRotateStack(stack_b,'b');
 				pushStack(stack_a,stack_b,'a');
 		}
+}
+
+int calcMoves(t_stack *stack_a,t_stack *stack_b,t_node *candidate,t_node *target)
+{
+	int mv_c;
+	int mv_t;
+	printf("c %ld t %ld\n",candidate->data,target->data);
+	mv_c = optimizedRotate(stack_a,candidate->index);
+	mv_t = optimizedRotate(stack_b,target->index);
+	printf("mv_c %d mv_t %d\n",mv_c,mv_t);
+	if((mv_c <= mv_t ) && (mv_c >= 0 && mv_t >= 0) )
+		return(mv_t);
+	else if((mv_c >= mv_t ) && (mv_c >= 0 && mv_t >= 0) )
+		return (mv_c);
+	else if((mv_c <= mv_t ) && (mv_c < 0 && mv_t < 0) )
+		return(ft_abs(mv_t));
+	else if((mv_c >= mv_t ) && (mv_c < 0 && mv_t < 0) )
+		return(ft_abs(mv_c));
+	else if((mv_c < 0 && mv_t >= 0) ||  (mv_t < 0 && mv_c >= 0))
+		return(ft_abs(mv_c) + ft_abs(mv_t));
+}
+
+void findPair(t_stack *stack_a,t_stack *stack_b)
+{
+	t_node *a;
+	t_node *b;
+	int minMoves;
+	t_node *target;
+
+	minMoves = stack_a->size + stack_b->size;
+	a = stack_a->head;
+	target = NULL;
+	while(a)
+	{
+		b = stack_b->head;
+		while(b)
+		{
+			if((target == NULL) || (b->data < a->data && b->data > target->data))
+				target = b;
+			b = b->next;
+		}
+		if((target->data < a->data ) && calcMoves(stack_a,stack_b,a,target) < minMoves)
+		{
+				minMoves = calcMoves(stack_a,stack_b,a,target);
+				printf("%d min\n",minMoves);
+		}
+		a = a->next;
+	}
+
+printf("yo%ld %d\n",target->data,minMoves);
+}
+
+
+void turkSort(t_stack *stack_a, t_stack *stack_b)
+{
+	pushStack(stack_b,stack_a,'b');
+	pushStack(stack_b,stack_a,'b');
+
+	//while(stack_a->size > 3)
+	//{
+		findPair(stack_a,stack_b);
+	//}
 }
