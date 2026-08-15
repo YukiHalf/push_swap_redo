@@ -16,13 +16,12 @@ int optimizedRotate(t_stack *stack,int index)
 	{
 		if(tmp->index == index)
 			found = 1;
-		if(found)
+		if(found == 1)
 			j--;
 		else
 			i++;
 		tmp = tmp->next;
 	}
-	//printf("%d oR: %d %d\n",index,i,j);
 	if(i < -(j))
 		return(i);
 	else
@@ -176,13 +175,13 @@ t_node  *findTarget(t_stack *stack,int candidate)
 return target;
 }
 
-void meetPair(t_stack *stack_a, t_stack *stack_b,t_node *candidate,t_node *target)
+void meetPair(t_stack *stack_a, t_stack *stack_b,int canInd,int tarInd)
 {
 	int rCountCand;
 	int rCountTarg;
 
-	rCountCand = optimizedRotate(stack_a,candidate->index);
-	rCountTarg = optimizedRotate(stack_b,target->index);
+	rCountCand = optimizedRotate(stack_a,canInd);
+	rCountTarg = optimizedRotate(stack_b,tarInd);
 			printf("%d %d meetPair\n",rCountCand,rCountTarg);
 	if(rCountCand >= 0 && rCountTarg >= 0)
 	{
@@ -201,12 +200,13 @@ void meetPair(t_stack *stack_a, t_stack *stack_b,t_node *candidate,t_node *targe
 		}
 	doRotationStack(stack_a,rCountCand,'a');
 	doRotationStack(stack_b,rCountTarg,'b');
+	pushStack(stack_b,stack_a,'b');
 }
 
 void findPair(t_stack *stack_a,t_stack *stack_b)
 {
 	t_node *tmp;
-	t_node *candidate;
+	int canInd;
 	int minMoves;
 	int currMoves;
 	t_node *target;
@@ -220,13 +220,14 @@ void findPair(t_stack *stack_a,t_stack *stack_b)
 		if(currMoves < minMoves)
 		{
 				minMoves = currMoves;
-				candidate = tmp;
+				canInd = tmp->index;
 				printf("%d min pari %ld %ld\n",minMoves,tmp->data,target->data);
 		}
 		tmp = tmp->next;
 	}
-	meetPair(stack_a,stack_b,candidate,target);
-printf("yo%ld %ld %d\n",target->data,candidate->data,minMoves);
+	printf("%d pari %ld\n",canInd,target->data);
+	meetPair(stack_a,stack_b,canInd,target->index);
+//printf("yo%ld %ld %d\n",target->data,candidate->data,minMoves);
 }
 
 void doRotationStack(t_stack *stack,int rotations,char x)
@@ -259,10 +260,15 @@ void turkSort(t_stack *stack_a, t_stack *stack_b)
 	pushStack(stack_b,stack_a,'b');
 	pushStack(stack_b,stack_a,'b');
 
+	DEBUG_printStack(stack_a);
+	DEBUG_printStack(stack_b);
+
 	//while(stack_a->size > 3)
 	//{
 		findPair(stack_a,stack_b);
 	//}
+	DEBUG_printStack(stack_a);
+	DEBUG_printStack(stack_b);
 	//simpleSort(stack_a);
 	//while(stack_b)
 	//{

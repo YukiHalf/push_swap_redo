@@ -21,12 +21,14 @@ return max;
 void DEBUG_printStack(t_stack *stack)
 {
 	t_node *tmp= stack->head;
-
+	printf("#####DEBUG#####\n");
 	while(tmp->next)
 	{
-		printf("%d %ld\n",tmp->index,tmp->data);
+		printf("I:%d, D:%ld\n",tmp->index,tmp->data);
 		tmp = tmp->next;
 	}
-		printf("%d %ld\n",tmp->index,tmp->data);
+		printf("I:%d, D:%ld\n",tmp->index,tmp->data);
+
+	printf("#####DEBUG#####\n");
 
 }
