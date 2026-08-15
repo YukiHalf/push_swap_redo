@@ -33,8 +33,14 @@ void turkSort(t_stack *stack_a, t_stack *stack_b);
 int maxIndex(t_stack *stack);
 // Moves
 void swapStack(t_stack *stack,char x);
-void rRotateStack(t_stack *stack,char x);
-void rotateStack(t_stack *stack,char x);
+void rRotateStack(t_stack *stack,char x,bool print);
+void rotateStack(t_stack *stack,char x,bool print);
 void pushStack(t_stack *toStack,t_stack *fromStack,char x);
+void rotateBothStacks(t_stack *stack_a,t_stack *stack_b,bool reverse);
 void doRotationStack(t_stack *stack,int rotations,char x);
+
+
+
+/// TO REMOVE
+void DEBUG_printStack(t_stack *stack);
 #endif

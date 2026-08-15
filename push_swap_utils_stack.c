@@ -53,18 +53,18 @@ void simpleSort(t_stack *stack)
 
 	if(node->index < node->next->index)
 		{
-			rRotateStack(stack,'a');
+			rRotateStack(stack,'a',1);
 			if(isSorted(stack) == 1)
 				swapStack(stack,'a');
 			return;
 		}
-		rotateStack(stack,'a');
+		rotateStack(stack,'a',1);
 		if(isSorted(stack) == 1)
 			swapStack(stack,'a');
 		else
 			return;
 		if(isSorted(stack) == 1)
-			rotateStack(stack,'a');
+			rotateStack(stack,'a',1);
 }
 
 void quickSort(t_stack *stack_a,t_stack *stack_b)
@@ -117,7 +117,7 @@ void radixSort(t_stack *stack_a,t_stack *stack_b)
 					pushed++;
 				}
 			else
-				rotateStack(stack_a,'a');
+				rotateStack(stack_a,'a',1);
 			}
 			lower = upper;
 		}
@@ -163,10 +163,10 @@ t_node  *findTarget(t_stack *stack,int candidate)
 	tmp = stack->head;
 	while(tmp)
 	{
-		printf("%ld < %d\n",tmp->data,candidate);
+		//printf("%ld < %d\n",tmp->data,candidate);
 		if(tmp->data < candidate && tmp->data > max)
 			{
-			printf("is good %ld %d\n",tmp->data,candidate);
+			//printf("is good %ld %d\n",tmp->data,candidate);
 
 				target = tmp;
 				max = tmp->data;
@@ -176,29 +176,57 @@ t_node  *findTarget(t_stack *stack,int candidate)
 return target;
 }
 
+void meetPair(t_stack *stack_a, t_stack *stack_b,t_node *candidate,t_node *target)
+{
+	int rCountCand;
+	int rCountTarg;
+
+	rCountCand = optimizedRotate(stack_a,candidate->index);
+	rCountTarg = optimizedRotate(stack_b,target->index);
+			printf("%d %d meetPair\n",rCountCand,rCountTarg);
+	if(rCountCand >= 0 && rCountTarg >= 0)
+	{
+		while(rCountCand && rCountTarg)
+		{
+			rotateBothStacks(stack_a,stack_b,0);
+			rCountCand--;
+			rCountTarg--;
+		}
+	}else if(rCountCand < 0 && rCountTarg < 0)
+		while(rCountCand < 0 && rCountTarg < 0)
+		{
+			rotateBothStacks(stack_a,stack_b,1);
+			rCountCand++;
+			rCountTarg++;
+		}
+	doRotationStack(stack_a,rCountCand,'a');
+	doRotationStack(stack_b,rCountTarg,'b');
+}
+
 void findPair(t_stack *stack_a,t_stack *stack_b)
 {
-	t_node *a;
-	t_node *b;
+	t_node *tmp;
+	t_node *candidate;
 	int minMoves;
 	int currMoves;
 	t_node *target;
 
 	minMoves = stack_a->size + stack_b->size;
-	a = stack_a->head;
-	while(a)
+	tmp = stack_a->head;
+	while(tmp)
 	{
-		target = findTarget(stack_b,a->data);
-		currMoves = calcMoves(stack_a,stack_b,a,target);
+		target = findTarget(stack_b,tmp->data);
+		currMoves = calcMoves(stack_a,stack_b,tmp,target);
 		if(currMoves < minMoves)
 		{
 				minMoves = currMoves;
-				printf("%d min pari %ld %ld\n",minMoves,a->data,target->data);
+				candidate = tmp;
+				printf("%d min pari %ld %ld\n",minMoves,tmp->data,target->data);
 		}
-		a = a->next;
+		tmp = tmp->next;
 	}
-
-printf("yo%ld %d\n",target->data,minMoves);
+	meetPair(stack_a,stack_b,candidate,target);
+printf("yo%ld %ld %d\n",target->data,candidate->data,minMoves);
 }
 
 void doRotationStack(t_stack *stack,int rotations,char x)
@@ -210,14 +238,14 @@ void doRotationStack(t_stack *stack,int rotations,char x)
 	{
 		while(i < ft_abs(rotations))
 		{
-			rRotateStack(stack,x);
+			rRotateStack(stack,x,1);
 			i++;
 		}
 	}else
 	{
 		while(i < rotations)
 		{
-			rotateStack(stack,x);
+			rotateStack(stack,x,1);
 			i++;
 		}
 	}
@@ -226,6 +254,8 @@ void doRotationStack(t_stack *stack,int rotations,char x)
 
 void turkSort(t_stack *stack_a, t_stack *stack_b)
 {
+	pushStack(stack_b,stack_a,'b');
+	pushStack(stack_b,stack_a,'b');
 	pushStack(stack_b,stack_a,'b');
 	pushStack(stack_b,stack_a,'b');
 

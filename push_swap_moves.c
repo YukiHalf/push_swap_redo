@@ -17,7 +17,7 @@ void pushStack(t_stack *toStack,t_stack *fromStack,char x)
 }
 
 
-void rotateStack(t_stack *stack,char x)
+void rotateStack(t_stack *stack,char x,bool print)
 {
 
 	t_node *tmp;
@@ -29,12 +29,15 @@ void rotateStack(t_stack *stack,char x)
 	tmp = stack->head;
 	stack->head = stack->head->next;
 	tmp->next = NULL;
+	if(print)
+	{
 	write(1,"r",2);
 	write(1,&x,1);
 	write(1,"\n",1);
+	}
 }
 
-void rRotateStack(t_stack *stack,char x)
+void rRotateStack(t_stack *stack,char x,bool print)
 {
 	t_node *tmp;
 
@@ -44,9 +47,12 @@ void rRotateStack(t_stack *stack,char x)
 	tmp->next->next = stack->head;
 	stack->head = tmp->next;
 	tmp->next = NULL;
+	if(print)
+	{
 	write(1,"rr",2);
 	write(1,&x,1);
 	write(1,"\n",1);
+	}
 }
 
 
@@ -62,5 +68,22 @@ void swapStack(t_stack *stack,char x)
 	stack->head = tmp;
 	write(1,"s",1);
 	write(1,&x,1);
+	write(1,"\n",1);
+}
+
+
+void rotateBothStacks(t_stack *stack_a,t_stack *stack_b,bool reverse)
+{
+	if(reverse)
+	{
+		rRotateStack(stack_a,'a',0);
+		rRotateStack(stack_b,'b',0);
+		write(1,"r",1);
+	}else
+	{
+		rotateStack(stack_a,'a',0);
+		rotateStack(stack_b,'b',0);
+	}
+	write(1,"rr",2);
 	write(1,"\n",1);
 }
