@@ -42,5 +42,5 @@ void doRotationStack(t_stack *stack,int rotations,char x);
 
 
 /// TO REMOVE
-void DEBUG_printStack(t_stack *stack);
+void DEBUG_printStack(t_stack *stack,char x);
 #endif

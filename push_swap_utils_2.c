@@ -18,10 +18,10 @@ return max;
 }
 
 
-void DEBUG_printStack(t_stack *stack)
+void DEBUG_printStack(t_stack *stack,char x)
 {
 	t_node *tmp= stack->head;
-	printf("#####DEBUG#####\n");
+	printf("#####DEBUG %c#####\n",x);
 	while(tmp->next)
 	{
 		printf("I:%d, D:%ld\n",tmp->index,tmp->data);
@@ -29,6 +29,6 @@ void DEBUG_printStack(t_stack *stack)
 	}
 		printf("I:%d, D:%ld\n",tmp->index,tmp->data);
 
-	printf("#####DEBUG#####\n");
+	printf("#####DEBUG %c#####\n",x);
 
 }
