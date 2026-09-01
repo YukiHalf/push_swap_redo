@@ -9,3 +9,7 @@
 !push_swap_utils_stack.c
 !push_swap_moves.c
 !push_swap_utils_2.c
+!bonus/checker_moves.c
+!bonus/checker.c
+!bonus/checker.h
+!bonus/Makefile

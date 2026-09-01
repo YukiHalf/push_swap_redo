@@ -181,12 +181,12 @@ void findPairA(t_stack *stack_a,t_stack *stack_b)
 				minMoves = currMoves;
 				canInd = tmp->index;
 				targInd = target;
-		printf("can=%d targ=%d  currMoves=%d minMoves=%d condition=%d\n",
-      canInd,target, currMoves, minMoves, currMoves < minMoves);
+		//printf("can=%d targ=%d  currMoves=%d minMoves=%d condition=%d\n",
+    //  canInd,target, currMoves, minMoves, currMoves < minMoves);
 		}
 		tmp = tmp->next;
 	}
-	printf("%d pari %d\n",canInd,targInd);
+	//printf("%d pari %d\n",canInd,targInd);
 	meetPairA(stack_a,stack_b,canInd,targInd);
 //printf("yo%ld %ld %d\n",target->data,candidate->data,minMoves);
 }
@@ -249,10 +249,10 @@ int findTargetB(t_stack *stack,int candidate)
 	tmp = stack->head;
 	while(tmp)
 	{
-		printf("%d > %d | %d\n",tmp->index,candidate,min);
+		//printf("%d > %d | %d\n",tmp->index,candidate,min);
 		if(tmp->index > candidate && tmp->index <= min)
 			{
-			printf("is good %d %d\n",tmp->index,candidate);
+			//printf("is good %d %d\n",tmp->index,candidate);
 				min = tmp->index;
 			}
 		tmp = tmp->next;
@@ -284,12 +284,12 @@ void findPairB(t_stack *stack_a,t_stack *stack_b)
 				minMoves = currMoves;
 				canInd = tmp->index;
 				targInd = target;
-		printf("can=%d targ=%d  currMoves=%d minMoves=%d condition=%d\n",
-      canInd,target, currMoves, minMoves, currMoves < minMoves);
+		//printf("can=%d targ=%d  currMoves=%d minMoves=%d condition=%d\n",
+    //  canInd,target, currMoves, minMoves, currMoves < minMoves);
 		}
 		tmp = tmp->next;
 	}
-	printf("%d pari %d\n",canInd,targInd);
+	//printf("%d pari %d\n",canInd,targInd);
 	meetPairB(stack_b,stack_a,canInd,targInd);
 //printf("yo%ld %ld %d\n",target->data,candidate->data,minMoves);
 }
@@ -324,21 +324,21 @@ void turkSort(t_stack *stack_a, t_stack *stack_b)
 
 	while(stack_a->size > 3)
 	{
-		DEBUG_printStack(stack_a,'a');
-		DEBUG_printStack(stack_b,'b');
+		//DEBUG_printStack(stack_a,'a');
+		//DEBUG_printStack(stack_b,'b');
 		findPairA(stack_a,stack_b);
 	}
 	if(isSorted(stack_a) == 1)
 		simpleSort(stack_a);
-	printf("we go back\n");
+	//printf("we go back\n");
 	while(stack_b->size > 0)
 	{
-		DEBUG_printStack(stack_a,'a');
-		DEBUG_printStack(stack_b,'b');
+		//DEBUG_printStack(stack_a,'a');
+		//DEBUG_printStack(stack_b,'b');
 		findPairB(stack_a,stack_b);
 	}
-		DEBUG_printStack(stack_a,'a');
+		//DEBUG_printStack(stack_a,'a');
 	doRotationStack(stack_a,optimizedRotate(stack_a,0),'a');
-		DEBUG_printStack(stack_a,'a');
+		//DEBUG_printStack(stack_a,'a');
 
 }
