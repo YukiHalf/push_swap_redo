@@ -149,7 +149,8 @@ int main(int argc,char **argv)
 	while(line)
 	{
 		if(doMove(line,&stack_a,&stack_b) == -1)
-		{printf("move not good :%d",line);	break;}
+		{printf("move not good :%s",line);	break;}
+		printf("%s\n",line);
 		free(line);
 		line = get_next_line(0);
 	}
