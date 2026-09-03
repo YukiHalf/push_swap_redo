@@ -25,14 +25,19 @@ typedef struct stack_s {
 	t_node *head;
 } t_stack;
 
+#define MAX_INT 2147483647
+#define MIN_INT (-2147483647 - 1)
+
 void pushStack(t_stack *toStack,t_stack *fromStack,char x,bool print);
 void rotateStack(t_stack *stack,char x,bool print);
 void rRotateStack(t_stack *stack,char x,bool print);
 void swapStack(t_stack *stack,char x,bool print);
 void rotateBothStacks(t_stack *stack_a,t_stack *stack_b,bool reverse,int print);
 
-
+int checkArgs(int count, char **numbers);
 int isSorted(t_stack *stack);
+int checkDupes(t_node *node);
+
 #endif
 
 

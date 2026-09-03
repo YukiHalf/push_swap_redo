@@ -134,28 +134,36 @@ void DEBUG_printStack(t_stack *stack,char x)
 	printf("#####DEBUG %c#####\n",x);
 }
 
-
-int main(int argc,char **argv)
+void doCheck(t_stack *stack_a,t_stack *stack_b)
 {
 	char *line;
-	t_stack stack_a;
-	t_stack stack_b;
 
-	if(argc == 1)
-		return 0;
-	initStacks(&stack_a,&stack_b);
-	parseArgs(&stack_a,argc,argv);
 	line = get_next_line(0);
 	while(line)
 	{
-		if(doMove(line,&stack_a,&stack_b) == -1)
-		{printf("move not good :%s",line);	break;}
-		printf("%s\n",line);
+		if(doMove(line,stack_a,stack_b) == -1)
+			break;
 		free(line);
 		line = get_next_line(0);
 	}
 	if(line)
 		free(line);
+}
+
+int main(int argc,char **argv)
+{
+	t_stack stack_a;
+	t_stack stack_b;
+
+	if(argc == 1)
+		return 0;
+	if(checkArgs(argc,argv) == 1)
+		display_error("Error\n",true);
+	initStacks(&stack_a,&stack_b);
+	parseArgs(&stack_a,argc,argv);
+	if(checkDupes(stack_a.head) == -1)
+		display_error("Error\n",true);
+	doCheck(&stack_a,&stack_b);
 	DEBUG_printStack(&stack_a,'a');
 	DEBUG_printStack(&stack_b,'b');
 	if(isSorted(&stack_a) == 0 && stack_b.head == NULL && stack_b.size == 0)
