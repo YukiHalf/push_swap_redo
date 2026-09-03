@@ -12,4 +12,5 @@
 !bonus/checker_moves.c
 !bonus/checker.c
 !bonus/checker.h
-!bonus/Makefile
+!bonus/checker_utils.c
+!bonus
