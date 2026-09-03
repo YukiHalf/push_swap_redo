@@ -40,6 +40,8 @@ int checkArgs(int count, char **numbers)
 	long tmp_nb;
 
 	i = 0;
+	if(numbers[1] && numbers[1][0] == '\0')
+		return 1;
 	while(++i < count)
 	{
 		tmp = ft_split(numbers[i],' ');
