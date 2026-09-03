@@ -5,13 +5,13 @@ int complexMove(char *move,t_stack *stack_a,t_stack *stack_b)
 {
 	if(ft_strcmp(move,"ss\n") == 0)
 	{
-		swapStack(stack_a,'a',true);
-		swapStack(stack_b,'b',true);
+		swapStack(stack_a,'a',false);
+		swapStack(stack_b,'b',false);
 	}
 	else if(ft_strcmp(move,"rr\n") == 0)
-		rotateBothStacks(stack_a,stack_b,false,true);
+		rotateBothStacks(stack_a,stack_b,false,false);
 	else if(ft_strcmp(move,"rrr\n") == 0)
-		rotateBothStacks(stack_a,stack_b,true,true);
+		rotateBothStacks(stack_a,stack_b,true,false);
 	else
 		return -1;
 	return 0;
@@ -22,23 +22,23 @@ void simpleMove(char move,char dir,t_stack *stack_a,t_stack *stack_b)
 	if(dir == 'a')
 	{
 		if(move == 's')
-			swapStack(stack_a,dir,true);
+			swapStack(stack_a,dir,false);
 		else if(move == 'p')
-			pushStack(stack_a,stack_b,dir,true);
+			pushStack(stack_a,stack_b,dir,false);
 		else if(move == 'r')
-			rotateStack(stack_a,dir,true);
+			rotateStack(stack_a,dir,false);
 		else
-			rRotateStack(stack_a,dir,true);
+			rRotateStack(stack_a,dir,false);
 	}else
 	{
 		if(move == 's')
-			swapStack(stack_b,dir,true);
+			swapStack(stack_b,dir,false);
 		else if(move == 'p')
-			pushStack(stack_b,stack_a,dir,true);
+			pushStack(stack_b,stack_a,dir,false);
 		else if(move == 'r')
-			rotateStack(stack_b,dir,true);
+			rotateStack(stack_b,dir,false);
 		else
-			rRotateStack(stack_b,dir,true);
+			rRotateStack(stack_b,dir,false);
 	}
 }
 
