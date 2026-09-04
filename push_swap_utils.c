@@ -101,7 +101,14 @@ void sortStacks(t_stack *stack_a,t_stack *stack_b)
 	else if(stack_a->size > 3 && stack_a->size <= 7)
 		quickSort(stack_a,stack_b);
 	else if(stack_a->size > 7)
-		ksort(stack_a,stack_b);
+	{
+	ksort(stack_a,stack_b);
+	while(stack_b->head)
+	{
+		doRotationStack(stack_b,optimizedRotate(stack_b,stack_b->size - 1),'b');
+		pushStack(stack_a,stack_b,'a');
+	}
+}
 	else
 		return;
 }

@@ -19,9 +19,12 @@ void pushStack(t_stack *toStack,t_stack *fromStack,char x)
 
 void rotateStack(t_stack *stack,char x,bool print)
 {
-
 	t_node *tmp;
 
+	if(stack->head)
+		tmp = stack->head;
+	else
+		return;
 	tmp = stack->head;
 	while(tmp->next)
 			tmp = tmp->next;
@@ -40,8 +43,10 @@ void rotateStack(t_stack *stack,char x,bool print)
 void rRotateStack(t_stack *stack,char x,bool print)
 {
 	t_node *tmp;
-
-	tmp = stack->head;
+	if(stack->head)
+		tmp = stack->head;
+	else
+		return;
 	while(tmp->next->next)
 		tmp = tmp->next;
 	tmp->next->next = stack->head;

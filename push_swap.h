@@ -22,6 +22,7 @@ typedef struct stack_s {
 
 // Utils
 int hasAlpha(char *s);
+int optimizedRotate(t_stack *stack,int index);
 int isSorted(t_stack *stack);
 int addNodeStack(t_stack *stack, long number);
 int checkDupes(t_node *node);
@@ -38,7 +39,6 @@ void rotateStack(t_stack *stack,char x,bool print);
 void pushStack(t_stack *toStack,t_stack *fromStack,char x);
 void rotateBothStacks(t_stack *stack_a,t_stack *stack_b,bool reverse);
 void doRotationStack(t_stack *stack,int rotations,char x);
-
 
 
 /// TO REMOVE

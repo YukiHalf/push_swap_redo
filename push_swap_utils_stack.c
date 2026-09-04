@@ -14,7 +14,6 @@ int optimizedRotate(t_stack *stack,int index)
 	tmp = stack->head;
 	while(tmp)
 	{
-		//printf("%d %d %d %d ?= %d \n",i,j,found,tmp->index,index);
 		if(tmp->index == index)
 			found = 1;
 		if(found == 1)
@@ -123,19 +122,18 @@ void 	ksort(t_stack *stack_a,t_stack *stack_b)
 		if(stack_a->head->index <= i)
 		{
 			pushStack(stack_b,stack_a,'b');
-			rotateStack(stack_b,'b',true);
 			i++;
-		}else if(stack_a->head->index <= i + middle)
-			{
-				pushStack(stack_b,stack_a,'b');
-				i++;
-			}
-		else
-			rotateStack(stack_a,'a',true);
-	}
-		while(stack_b->head)
-	{
-		doRotationStack(stack_b,optimizedRotate(stack_b,stack_b->size - 1),'b');
-		pushStack(stack_a,stack_b,'a');
+			if(stack_a->head &&	stack_a->head->index > i + middle)
+				rotateBothStacks(stack_a,stack_b,false);
+			else
+				rotateStack(stack_b,'b',true);
+		}
+		else if(stack_a->head->index <= i + middle)
+		{
+			pushStack(stack_b,stack_a,'b');
+			i++;
+		}
+	else
+		rotateStack(stack_a,'a',true);
 	}
 }
