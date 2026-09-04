@@ -20,7 +20,14 @@ return max;
 
 void DEBUG_printStack(t_stack *stack,char x)
 {
-	t_node *tmp= stack->head;
+	t_node *tmp;
+	if(stack->head)
+	tmp = stack->head;
+	else
+		{
+			printf("empty\n");
+			return;
+		}
 	printf("#####DEBUG %c#####\n",x);
 	while(tmp->next)
 	{
